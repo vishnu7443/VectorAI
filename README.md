@@ -369,9 +369,9 @@ Vector was developed using an AI-assisted engineering workflow with the followin
 
 | Name | 
 |------|------|
-| **Sriram S** |  |
+| **Sriram S** | 
 | **Yadhu Surya R** | 
-| **Vishnu Vardan R** |
+| **Vishnu Vardan R G** |
 
 
 ---
