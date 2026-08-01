@@ -1,7 +1,7 @@
 # 🚀 Vector — AI Decision Intelligence & Assurance Platform
 
 <p align="center">
-  <img src="assets/public/Final_Logo-removebg-preview.png" alt="Vector Banner" width="200px" height="200px">
+  <img src="frontend/public/Final_Logo-removebg-preview.png" alt="Vector Banner" width="200px" height="200px">
 </p>
 
 <p align="center">
