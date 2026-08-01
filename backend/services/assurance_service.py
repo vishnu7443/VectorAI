@@ -212,37 +212,19 @@ def evaluate_candidate_assurance(candidate_id: str, db: Session) -> Decision:
         )
         db.add(decision)
     
-    # Save Assurance details to timeline
-    from .metrics_service import active_simulations
-    timeline_id = active_simulations.get(service, {}).get("id", pred.id)
-    
-    # Check if timeline event already exists to prevent spam
-    existing_event = db.query(TimelineEvent)\
-        .filter(TimelineEvent.timeline_id == timeline_id, TimelineEvent.event_type == "ASSURANCE")\
-        .first()
-        
-    if not existing_event:
-        timeline_event = TimelineEvent(
-            id=str(uuid.uuid4()),
-            timeline_id=timeline_id,
-            event_type="ASSURANCE",
-            service_name=service,
-            payload={
-                "decision_id": decision_id,
-                "score": decision_score,
-                "decision": final_decision,
-                "explanation": f"Decision assurance evaluated '{action_name}' with score {decision_score}. Action resolved path: {final_decision.replace('_', ' ').title()}.",
-                "breakdown": {
-                    "confidence": conf_score,
-                    "risk": risk_score,
-                    "policy": policy_status,
-                    "simulation": sim_score,
-                    "rollback": rollback_score
-                }
-            }
-        )
-        db.add(timeline_event)
-        
     db.commit()
+
+    if status == "PENDING_APPROVAL" or risk_score >= 50.0:
+        try:
+            from .notification_service import send_telegram_approval_request
+            send_telegram_approval_request(
+                decision_id=decision.id,
+                service_name=service,
+                action_name=action_name,
+                risk_score=risk_score,
+                details=f"High Risk Decision evaluated ({final_decision}). Manual SRE approval required."
+            )
+        except Exception as e:
+            print(" [!] Telegram approval dispatch notice:", e)
 
     return decision

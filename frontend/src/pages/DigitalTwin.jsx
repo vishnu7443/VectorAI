@@ -28,10 +28,8 @@ export default function DigitalTwin() {
       { id: 'paas-db-cluster', label: 'Database Cluster', x: 800, y: 150, icon: Database },
     ],
     inventraerp: [
-      { id: 'erp-frontend', label: 'ERP Frontend', x: 200, y: 150, icon: Globe },
-      { id: 'erp-core', label: 'Core Engine', x: 500, y: 100, icon: Server },
-      { id: 'erp-inventory', label: 'Inventory Service', x: 500, y: 250, icon: Activity },
-      { id: 'erp-db', label: 'ERP Database', x: 800, y: 175, icon: Database },
+      { id: 'erp-frontend', label: 'ERP Web Frontend', x: 300, y: 200, icon: Globe },
+      { id: 'erp-db', label: 'ERP Relational DB', x: 700, y: 200, icon: Database },
     ]
   };
 
@@ -55,10 +53,7 @@ export default function DigitalTwin() {
       { source: 'paas-auth-proxy', target: 'paas-db-cluster' }
     ],
     inventraerp: [
-      { source: 'erp-frontend', target: 'erp-core' },
-      { source: 'erp-frontend', target: 'erp-inventory' },
-      { source: 'erp-core', target: 'erp-db' },
-      { source: 'erp-inventory', target: 'erp-db' }
+      { source: 'erp-frontend', target: 'erp-db' }
     ]
   };
 

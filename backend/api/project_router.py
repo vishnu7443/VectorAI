@@ -80,7 +80,7 @@ def connect_project(req: ConnectProjectRequest, db: Session = Depends(get_db)):
     db.add(new_project)
     
     # Let's seed initial metrics and a policy for this client project
-    services = ["erp-frontend", "erp-core", "erp-inventory", "erp-db"]
+    services = ["erp-frontend", "erp-db"]
     baselines = {
         "erp-frontend": {"cpu": 20.0, "memory": 30.0, "network": 1500.0, "latency": 40.0},
         "erp-core": {"cpu": 35.0, "memory": 50.0, "network": 2200.0, "latency": 25.0},

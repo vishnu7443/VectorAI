@@ -9,9 +9,9 @@ from ..services.metrics_service import active_simulations
 
 router = APIRouter(prefix="/api")
 
-# ── Dashboard cache: re-compute at most once every 3 seconds per mode ─────────
+# ── Dashboard cache: re-compute instantly for live responsiveness ────────────
 _dashboard_cache: dict[str, dict] = {}   # mode → {"ts": float, "data": dict}
-CACHE_TTL = 3.0  # seconds
+CACHE_TTL = 0.5  # seconds
 
 @router.get("/dashboard")
 def get_dashboard_summary(mode: str = "standard", db: Session = Depends(get_db)):
@@ -24,7 +24,7 @@ def get_dashboard_summary(mode: str = "standard", db: Session = Depends(get_db))
     if mode == "ecommerce":
         services = ["shop-frontend", "shop-auth", "shop-catalog", "shop-notifications"]
     elif mode == "inventraerp":
-        services = ["erp-frontend", "erp-core", "erp-inventory", "erp-db"]
+        services = ["erp-frontend", "erp-db"]
     else:
         services = ["payment-service", "auth-service", "frontend-service", "database-service"]
     latest_metrics = {}
@@ -131,7 +131,7 @@ def get_active_alerts(mode: str = "standard", db: Session = Depends(get_db)):
     if mode == "ecommerce":
         services = ["shop-frontend", "shop-auth", "shop-catalog", "shop-notifications"]
     elif mode == "inventraerp":
-        services = ["erp-frontend", "erp-core", "erp-inventory", "erp-db"]
+        services = ["erp-frontend", "erp-db"]
     else:
         services = ["payment-service", "auth-service", "frontend-service", "database-service"]
 
@@ -211,7 +211,7 @@ def get_recent_decisions(mode: str = "standard", db: Session = Depends(get_db)):
     if mode == "ecommerce":
         services = ["shop-frontend", "shop-auth", "shop-catalog", "shop-notifications"]
     elif mode == "inventraerp":
-        services = ["erp-frontend", "erp-core", "erp-inventory", "erp-db"]
+        services = ["erp-frontend", "erp-db"]
     else:
         services = ["payment-service", "auth-service", "frontend-service", "database-service"]
 

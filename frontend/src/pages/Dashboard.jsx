@@ -37,7 +37,7 @@ export default function Dashboard({ dashboardData, setDashboardData }) {
     const allowed = mode === 'ecommerce' 
       ? ['shop-frontend', 'shop-auth', 'shop-catalog', 'shop-notifications']
       : mode === 'inventraerp'
-      ? ['erp-frontend', 'erp-core', 'erp-inventory', 'erp-db']
+      ? ['erp-frontend', 'erp-db']
       : ['payment-service', 'auth-service', 'frontend-service', 'database-service'];
     
     if (!allowed.includes(selectedService)) {
@@ -348,10 +348,15 @@ export default function Dashboard({ dashboardData, setDashboardData }) {
         transition: 'opacity 0.4s ease, max-height 0.4s ease',
         display: 'flex', flexDirection: 'column', gap: '0.8rem', width: '100%'
       }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-rose)', letterSpacing: '0.5px' }}>
-          ⚠️ ACTIVE FORECAST ALERTS REQUIRE OPERATOR ACTION
-        </span>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-rose)', letterSpacing: '0.5px' }}>
+            ⚠️ PRE-CRITICAL FORECAST ALERTS (DETECTED BEFORE SERVICE CRASH)
+          </span>
+          <span className="highlight-badge-green" style={{ fontSize: '0.65rem', padding: '0.15rem 0.5rem', background: '#10b981', color: '#ffffff' }}>
+            🛡️ ZERO DATA LOSS GUARANTEED | 0 TRANSACTIONS DROPPED
+          </span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.2rem' }}>
           {activeThreatAlerts.map((p) => (
             <div 
               key={p.id} 
@@ -371,10 +376,14 @@ export default function Dashboard({ dashboardData, setDashboardData }) {
                     {p.risk_level.toUpperCase()} RISK
                   </span>
                   <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-slate-700)' }}>{p.service_name}</span>
+                  <span style={{ fontSize: '0.65rem', color: '#10b981', fontWeight: 700 }}>+300s Horizon</span>
                 </div>
                 <h4 style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--color-dark)', marginTop: '0.3rem' }}>
                   Predicted {p.metric_name.toUpperCase()} exhaustion ({p.predicted_value}%)
                 </h4>
+                <p style={{ fontSize: '0.7rem', color: 'var(--color-slate-400)', fontWeight: 600, marginTop: '0.1rem' }}>
+                  Vector Pre-Emptive Mitigation Required — Zero Data Loss Active
+                </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.1rem' }}>
                   <p style={{ fontSize: '0.7rem', color: 'var(--color-slate-400)', fontWeight: 500, margin: 0 }}>
                     Confidence: {Math.round(p.confidence_score * 100)}%

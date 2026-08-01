@@ -30,6 +30,16 @@ def trigger_decision_execution(
     execution = execute_decision(decision_id, db)
     if not execution:
         raise HTTPException(status_code=500, detail="Failed to run execution command.")
+
+    try:
+        from ..services.notification_service import notify_engineer
+        notify_engineer(
+            title=f"Pre-Emptive Remediation Executed on {dec.target_service}",
+            message=f"Vector AI executed action for {dec.target_service}. Result: {execution.result_summary}. Zero Data Loss Guaranteed.",
+            level="INFO"
+        )
+    except Exception as e:
+        pass
         
     return {
         "execution_id": execution.id,

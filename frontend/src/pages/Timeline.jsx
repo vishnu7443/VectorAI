@@ -83,7 +83,7 @@ export default function Timeline() {
   return (
     <div className="responsive-grid timeline-cols" style={{ gap: '1.5rem', width: '100%', alignItems: 'start' }}>
       {/* Incident Selection Column (Left) */}
-      <div className="glass-panel" style={{ 
+      <div className="glass-panel timeline-left-panel" style={{ 
         padding: '1.5rem', 
         backgroundColor: '#ffffff',
         maxHeight: 'calc(100vh - 140px)',

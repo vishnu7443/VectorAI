@@ -43,7 +43,7 @@ def list_timelines(mode: str = "standard", db: Session = Depends(get_db)):
     if mode == "ecommerce":
         services = ["shop-frontend", "shop-auth", "shop-catalog", "shop-notifications"]
     elif mode == "inventraerp":
-        services = ["erp-frontend", "erp-core", "erp-inventory", "erp-db"]
+        services = ["erp-frontend", "erp-db"]
     else:
         services = ["payment-service", "auth-service", "frontend-service", "database-service"]
         
@@ -103,7 +103,7 @@ def get_recent_timeline_events(limit: int = 10, mode: str = "standard", db: Sess
     if mode == "ecommerce":
         services = ["shop-frontend", "shop-auth", "shop-catalog", "shop-notifications"]
     elif mode == "inventraerp":
-        services = ["erp-frontend", "erp-core", "erp-inventory", "erp-db"]
+        services = ["erp-frontend", "erp-db"]
     else:
         services = ["payment-service", "auth-service", "frontend-service", "database-service"]
         

@@ -21,7 +21,7 @@ def start_simulation(
         "payment-service", "auth-service", "frontend-service", "database-service",
         "shop-frontend", "shop-auth", "shop-catalog", "shop-notifications",
         "paas-web-app", "paas-api-gateway", "paas-auth-proxy", "paas-db-cluster",
-        "erp-frontend", "erp-core", "erp-inventory", "erp-db"
+        "erp-frontend", "erp-db"
     ]
     if target_service not in valid_services:
         raise HTTPException(status_code=400, detail="Invalid target service.")

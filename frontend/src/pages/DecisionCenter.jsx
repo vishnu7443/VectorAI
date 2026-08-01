@@ -338,7 +338,7 @@ export default function DecisionCenter() {
               </div>
 
               {/* 5-Dimensional Trust Grid */}
-              <div className="responsive-grid" style={{ gap: '1.2rem' }}>
+              <div className="responsive-grid two-cols-sm" style={{ gap: '1.2rem' }}>
                 {/* Confidence & Risk */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
                   {/* Confidence */}
