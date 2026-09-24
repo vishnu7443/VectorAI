@@ -423,3 +423,5 @@ Special thanks to the creators of:
 **Made with ❤️ by Team Codex**
 
 </p>
+#   V e c t o r A I _ A I S u m m i t  
+ 
